@@ -10,7 +10,7 @@ class Bird():
         self.gravity = 0.6
         self.velocity = 0
         self.lift = -4
-        mutation = 0.01
+        mutation = 0.1
         
         if isinstance(brain, NeuralNetwork):
             self.brain = brain.copy()

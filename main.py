@@ -16,7 +16,7 @@ cycles = 1
 generation = 1
 
 def setup():
-    global birds
+    ###global birds
     global pipes
 
     
@@ -65,8 +65,7 @@ def draw():
             bird.think(pipes)
             
         if len(birds) == 0:
-            birds = nextGeneration(savedBirds)
-            savedBirds = []
+            nextGeneration()
             pipes = []
             pipes.append(Pipe())
             count = 0
@@ -92,25 +91,28 @@ def draw():
 
 
 
-setup()
+
 import random
 
-def nextGeneration(sBirds):
+def nextGeneration():
+    global birds 
     birds = []
     calculateFitness()
-    for i in range(TOTAL):
-        birds.append(pickOne(sBirds))
-        
-    return birds
-    
 
-def pickOne(birds):
+    for i in range(TOTAL):
+        birds.append(pickOne())
+        
+    savedBirds = []
+
+def pickOne():
+    
     index = 0
     r = random.random()
-
+    
     while r > 0:
-        r -= savedBirds[index].fitness
+        r = r - savedBirds[index].fitness
         index += 1
+        
         
     index -= 1
 
@@ -128,8 +130,10 @@ def calculateFitness():
     
     for bird in savedBirds:
         bird.fitness = bird.score / sum
-    
+
  
+setup()
+
 while True:
     
     updateShapes()
